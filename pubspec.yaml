@@ -1,0 +1,42 @@
+name: digital_pet_app
+description: "A new Flutter project."
+
+# Prevent accidental publishing to pub.dev
+publish_to: 'none' 
+
+# Versioning
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.1
+
+# Dependencies
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # iOS-style icons
+  cupertino_icons: ^1.0.8
+  
+  # Audio support
+  audioplayers: ^6.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Recommended linting rules
+  flutter_lints: ^5.0.0
+
+flutter:
+
+  # Enables Material Icons
+  uses-material-design: true
+
+  # Asset management
+  assets:
+    - assets/default_background.jpg
+    - assets/kid_playing_with_dog.gif
+    - assets/feeding_dog.gif
+    - assets/audio/dog_happy.mp3
+    - assets/audio/dog_eating.mp3
