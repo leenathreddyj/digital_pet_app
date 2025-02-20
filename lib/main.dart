@@ -11,7 +11,7 @@ void main() {
 
 class DigitalPetApp extends StatefulWidget {
   const DigitalPetApp({super.key});
-  
+
   @override
   DigitalPetAppState createState() => DigitalPetAppState();
 }
@@ -25,13 +25,13 @@ class DigitalPetAppState extends State<DigitalPetApp> {
   final TextEditingController _nameController = TextEditingController();
   final AudioPlayer _audioPlayer = AudioPlayer();
   String _backgroundImage = "assets/default_background.jpg";
-  
+
   @override
   void initState() {
     super.initState();
     _startHungerTimer();
   }
-  
+
   @override
   void dispose() {
     hungerTimer?.cancel();
@@ -39,7 +39,7 @@ class DigitalPetAppState extends State<DigitalPetApp> {
     _audioPlayer.dispose();
     super.dispose();
   }
-  
+
   void _startHungerTimer() {
     hungerTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
       setState(() {
@@ -50,7 +50,7 @@ class DigitalPetAppState extends State<DigitalPetApp> {
       });
     });
   }
-  
+
   void _playWithPet() {
     setState(() {
       happinessLevel = (happinessLevel + 10).clamp(0, 100);
@@ -60,7 +60,7 @@ class DigitalPetAppState extends State<DigitalPetApp> {
     });
     _audioPlayer.play(AssetSource("audio/dog_happy.mp3"));
   }
-  
+
   void _feedPet() {
     setState(() {
       hungerLevel = (hungerLevel - 10).clamp(0, 100);
@@ -70,7 +70,7 @@ class DigitalPetAppState extends State<DigitalPetApp> {
     });
     _audioPlayer.play(AssetSource("audio/dog_eating.mp3"));
   }
-  
+
   void _showGameOverDialog() {
     showDialog(
       context: context,
@@ -86,29 +86,29 @@ class DigitalPetAppState extends State<DigitalPetApp> {
       ),
     );
   }
-  
+
   Color _getPetColor() {
     if (happinessLevel > 70) return Colors.green;
     if (happinessLevel >= 30) return Colors.yellow;
     return Colors.red;
   }
-  
+
   String _getPetMood() {
     if (happinessLevel > 70) return "Happy 😊";
     if (happinessLevel >= 30) return "Neutral 😐";
     return "Unhappy 😢";
   }
-  
+
   void _setPetName() {
     setState(() {
       petName = _nameController.text;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Digital Pet')), 
+      appBar: AppBar(title: const Text('Digital Pet')),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -133,19 +133,26 @@ class DigitalPetAppState extends State<DigitalPetApp> {
                 child: Center(
                   child: Text(
                     _getPetMood(),
-                    style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               const SizedBox(height: 16.0),
-              Text('Happiness Level: $happinessLevel', style: const TextStyle(fontSize: 20.0)),
-              Text('Hunger Level: $hungerLevel', style: const TextStyle(fontSize: 20.0)),
-              Text('Energy Level: $energyLevel', style: const TextStyle(fontSize: 20.0)),
+              Text('Happiness Level: $happinessLevel',
+                  style: const TextStyle(fontSize: 20.0)),
+              Text('Hunger Level: $hungerLevel',
+                  style: const TextStyle(fontSize: 20.0)),
+              Text('Energy Level: $energyLevel',
+                  style: const TextStyle(fontSize: 20.0)),
               const SizedBox(height: 16.0),
               LinearProgressIndicator(value: energyLevel / 100),
               const SizedBox(height: 16.0),
-              ElevatedButton(onPressed: _playWithPet, child: const Text('Play with Your Pet')),
-              ElevatedButton(onPressed: _feedPet, child: const Text('Feed Your Pet')),
+              ElevatedButton(
+                  onPressed: _playWithPet,
+                  child: const Text('Play with Your Pet')),
+              ElevatedButton(
+                  onPressed: _feedPet, child: const Text('Feed Your Pet')),
               const SizedBox(height: 16.0),
               TextField(
                 controller: _nameController,
