@@ -121,6 +121,15 @@ class DigitalPetAppState extends State<DigitalPetApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: "Enter Pet Name"),
+              ),
+              ElevatedButton(
+                onPressed: _setPetName,
+                child: const Text("Confirm Name"),
+              ),
+              const SizedBox(height: 16.0),
               Text('Name: $petName', style: const TextStyle(fontSize: 20.0)),
               const SizedBox(height: 16.0),
               Container(
@@ -154,14 +163,23 @@ class DigitalPetAppState extends State<DigitalPetApp> {
               ElevatedButton(
                   onPressed: _feedPet, child: const Text('Feed Your Pet')),
               const SizedBox(height: 16.0),
-              TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: "Enter Pet Name"),
+              DropdownButton<String>(
+                value: _selectedActivity,
+                items: ["Play", "Rest", "Exercise"].map((String activity) {
+                  return DropdownMenuItem<String>(
+                    value: activity,
+                    child: Text(activity),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedActivity = newValue!;
+                  });
+                },
               ),
-              const SizedBox(height: 8.0),
               ElevatedButton(
-                onPressed: _setPetName,
-                child: const Text("Confirm Name"),
+                onPressed: _performActivity,
+                child: const Text("Perform Activity"),
               ),
             ],
           ),
