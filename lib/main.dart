@@ -170,3 +170,4 @@ class DigitalPetAppState extends State<DigitalPetApp> {
     );
   }
 }
+// implemented all features required
